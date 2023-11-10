@@ -9,6 +9,7 @@ t_map   unitializeandparse(t_map parsing, char *map)
     parsing.exit = 0;
     parsing.player = 0;
     parsing.wall = 0;
+	parsing.player_pos;
     while(map[i])
     {
         if(map[i] == '1')
@@ -16,7 +17,10 @@ t_map   unitializeandparse(t_map parsing, char *map)
         if(map[i] == 'E')
             parsing.exit += 1;
         if(map[i] == 'P')
+        {
             parsing.player += 1;
+            parsing.player_pos = i;
+        }
         if(map[i] == 'C')
             parsing.consomable += 1;
         i++;
@@ -24,19 +28,18 @@ t_map   unitializeandparse(t_map parsing, char *map)
     return(parsing);
 }
 
-int   parsingcorrect(char *map)
+int   parsingcorrect(t_map *map)
 {
-    t_map   parsing;
     int     i;
 
-    parsing = unitializeandparse(parsing, map);
+    *map = unitializeandparse(*map, map->map);
     i = 0;
-    while(map[i] && map != NULL)
+    while(map->map[i] && map->map != NULL)
     {
-        if (map[i] != '1' && map[i] != '0' && map[i] != 'E' && map[i] != 'P' && map[i] != 'C' && map[i] != '\n')
+        if (map->map[i] != '1' && map->map[i] != '0' && map->map[i] != 'E' && map->map[i] != 'P' && map->map[i] != 'C' && map->map[i] != '\n')
             return (0);
         i++;
     }
-    if (parsing.exit != 1 || parsing.player != 1 || parsing.consomable < 1)
+    if (map->exit != 1 || map->player != 1 || map->consomable < 1)
         return(0);
 }

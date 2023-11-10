@@ -1,9 +1,19 @@
-#ifndef GNL_H
-# define GNL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 14:15:59 by dcindrak          #+#    #+#             */
+/*   Updated: 2023/11/07 14:15:59 by dcindrak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef BUFFER_SIZE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
 # define BUFFER_SIZE 5
-#endif
 
 # include <stddef.h>
 # include <string.h>
@@ -13,11 +23,10 @@
 # include <sys/stat.h>
 # include <fcntl.h> 
 # include <stdint.h>
-int	ft_strlen(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char    *get_next_line(int fd);
-char	*ft_firstpart(char *str);
-char	*ft_secpart(char *str);
 
+int		ft_strlen(char *s);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 #endif
