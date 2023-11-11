@@ -44,7 +44,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoingnl(char *s1, char *s2, int j)
 {
 	size_t	i;
 	size_t	b;
@@ -52,6 +52,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	b = 0;
+	s2[j] = 0;
 	if (!s2)
 		return (NULL);
 	ren = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));

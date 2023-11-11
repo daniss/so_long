@@ -44,6 +44,7 @@ typedef struct s_data
 //utils
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*get_map(int fd, int *lign, int *colon);
+char	*ft_strjoin(char *s1, char *s2);
 
 //check
 int	check(int argc, char **argv);

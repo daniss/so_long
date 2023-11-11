@@ -26,7 +26,7 @@
 
 int		ft_strlen(char *s);
 char	*ft_strrchr(const char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoingnl(char *s1, char *s2, int j);
 char	*get_next_line(int fd);
 
 #endif

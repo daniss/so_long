@@ -36,7 +36,7 @@ static char	*ft_firstpart(char *str, char **temp)
 	return (firstpart);
 }
 
-static char	*ft_secpart(char *str, int j)
+char	*ft_secpart(char *str, int j)
 {
 	int		i;
 	int		len;
@@ -52,7 +52,7 @@ static char	*ft_secpart(char *str, int j)
 	while (str && str[len])
 		ret[i++] = str[++len];
 	ret[i] = 0;
-	if (j == 0 && ret[j] == '\0')
+	if ((j == 0 && ret[j] == '\0') || ret[0] == '\0')
 	{
 		free(ret);
 		ret = NULL;
@@ -61,52 +61,49 @@ static char	*ft_secpart(char *str, int j)
 	return (ret);
 }
 
+char	*reading(int *i, char *str, int fd)
+{
+	char	*buff;
+
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff, 0) < 0 || !buff)
+	{
+		free(buff);
+		return (NULL);
+	}
+	while (*i > 0)
+	{
+		*i = read(fd, buff, BUFFER_SIZE);
+		if (*i == 0 && !str)
+		{
+			free(buff);
+			return (NULL);
+		}
+		str = ft_strjoingnl(str, buff, *i);
+		if (ft_strrchr(str, '\n'))
+			break ;
+	}
+	free(buff);
+	return (str);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*str = NULL;
-	char		*ren;
-	char		buff[BUFFER_SIZE + 1];
+	char		*ret;
 	char		*temp;
 	int			i;
 
 	i = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	str = reading(&i, str, fd);
+	if (str == NULL)
 		return (NULL);
-	while (i > 0)
-	{
-		i = read(fd, buff, BUFFER_SIZE);
-		buff[i] = 0;
-		str = ft_strjoin(str, buff);
-		if (ft_strrchr(str, '\n'))
-			break ;
-	}
 	if (str[0] == '\0')
 	{
 		free(str);
 		return (NULL);
 	}
-	ren = ft_firstpart(str, &temp);
+	ret = ft_firstpart(str, &temp);
 	str = ft_secpart(temp, i);
-	return (ren);
+	return (ret);
 }
-
-/*
-int main()
-{
-	int fd;
-	int	i = 0;
-	char *test;
-	fd = open("map.ber", O_RDONLY);
-	test = get_next_line(fd);
-	printf("%s", test);
-	free(test);
-	while(i != 14)
-	{
-		test = get_next_line(fd);
-		if(test == NULL)
-			break;
-		printf("%s", test);
-		free(test);
-		i++;
-	}
-}*/
