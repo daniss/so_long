@@ -82,8 +82,6 @@ void    map_unitialize(int colon, int lign, t_map map)
     initstruct(&mapdata);
     mapdata.mlx_ptr = mlx_init();
     initcalc(colon, lign, &mapdata, map);
-	//free(mapdata.textures[0]);
-	//free(mapdata.textures[1]);
     putexture(map.map, mapdata);
     mlx_hook(mapdata.win_ptr, KeyPress, KeyPressMask, handle_key, &mapdata);
     mlx_loop(mapdata.mlx_ptr);
