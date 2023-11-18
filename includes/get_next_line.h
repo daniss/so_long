@@ -24,8 +24,8 @@
 # include <fcntl.h> 
 # include <stdint.h>
 
-int		ft_strlen(char *s);
-char	*ft_strrchr(const char *s, int c);
+int		ft_strlengnl(char *s);
+char	*ft_strrchrgnl(const char *s, int c);
 char	*ft_strjoingnl(char *s1, char *s2, int j);
 char	*get_next_line(int fd);
 

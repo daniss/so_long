@@ -1,32 +1,30 @@
 #include "../includes/so_long.h"
 
-char *get_map(int fd, int *count, int *lign)
+void get_map(int fd, t_data *mapdata)
 {
-	char	*map;
 	char	*str;
 	int		i;
 
 	i = 0;
-	*count = 0;
-	*lign = 0;
-	map = NULL;
+	mapdata->map.colon = 0;
+	mapdata->map.lign = 0;
+	mapdata->map.map = NULL;
 	str = get_next_line(fd);
-	while (str[*count] && str[*count] != '\n')
-		(*count)++;
+	while (str[mapdata->map.colon] && str[mapdata->map.colon] != '\n')
+		mapdata->map.colon++;
 	while (str != NULL)
 	{
-		map = ft_strjoin(map, str);
+		mapdata->map.map = ft_strjoin(mapdata->map.map, str);
 		free(str);
 		str = get_next_line(fd);
 		while (str != NULL && str[i] && str[i] != '\n')
 			i++;
-		if (str != NULL && *count != i)
+		if (str != NULL && mapdata->map.colon != i)
 		{
 			error("Error with the map\n");
 		}
-		(*lign)++;
+		mapdata->map.lign++;
 		i = 0;
 	}
 	free(str);
-	return (map);
 }

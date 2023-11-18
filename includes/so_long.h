@@ -20,42 +20,55 @@
 # define KEY_Q				113
 # define KEY_ESC  			65307
 
-typedef struct map
+typedef struct s_map
 {
 	int	exit;
 	int	player;
 	int	consomable;
 	int	wall;
 	int player_pos;
+	int	lign;
 	int	colon;
 	int	x;
 	int	y;
+	int	count;
 	char *map;
 }				t_map;
 
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*textures[6];
+}				t_mlx;
+
 typedef struct s_data
 {
-	void	*mlx_ptr; // MLX pointer
-	void	*win_ptr; // MLX window pointer
-	void	*textures[5]; // MLX image pointers (on the stack)
 	t_map	map;
+	t_mlx	mlx;
 }				t_data;
+
 
 //utils
 char	*ft_strnstr(const char *big, const char *little, size_t len);
-char	*get_map(int fd, int *lign, int *colon);
+void	get_map(int fd, t_data *mapdata);
 char	*ft_strjoin(char *s1, char *s2);
+int		freeall(t_data *mapdata);
+int		ft_strlen(char *s);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 //check
-int	check(int argc, char **argv);
-void    error(char *msg);
-int   parsingcorrect(t_map *map);
+void	check(int argc, char **argv, t_data *mapdata);
+void	error(char *msg);
+int		parsingcorrect(t_data *mapdata);
+int		checkroute(t_data *mapdata);
 
 //mapunitialize
-void    map_unitialize(int colon, int lign, t_map map);
-void    putexture(char *map, t_data mapdata);
+void	map_unitialize(t_data *map);
+void	putexture(t_data *mapdata);
 
 //keys
-int handle_key(int keysym, t_data *mapdata);
+int		handle_key(int keysym, t_data *mapdata);
 
 #endif

@@ -3,15 +3,15 @@ CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
 MLX			=	mlx/Makefile.gen
 LFT			=	libft/libft.a
-INC			=	-I ./inc -I ./libft -I ./mlx
-LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+INC			=	-I ./inc -I ./mlx
+LIB			=	-L lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	utils/check.c utils/so_long.c utils/utils.c utils/get_next_line_utils.c utils/get_next_line.c \
-utils/maps.c utils/error.c utils/parsing.c utils/mapunitialize.c utils/keyhandling.c
+utils/maps.c utils/error.c utils/parsing.c utils/mapunitialize.c utils/keyhandling.c utils/checkroute.c
 
-all:		$(MLX) $(LFT) obj $(NAME)
+all:		$(MLX) obj $(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) includes/so_long.h
 			$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
 $(MLX):
@@ -31,12 +31,12 @@ obj/%.o:	src/%.c
 			$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
-			@make -s $@ -C libft
+
 			@rm -rf $(OBJ) obj
 			@echo "object files removed."
 
 fclean:		clean
-			@make -s $@ -C libft
+
 			@rm -rf $(NAME)
 			@echo "binary file removed."
 

@@ -1,45 +1,44 @@
 #include "../includes/so_long.h"
 
-t_map   unitializeandparse(t_map parsing, char *map)
+void   unitializeandparse(t_data *datamap)
 {
-    int i;
+	int i;
 
-    i = 0;
-    parsing.consomable = 0;
-    parsing.exit = 0;
-    parsing.player = 0;
-    parsing.wall = 0;
-	parsing.player_pos;
-    while(map[i])
-    {
-        if(map[i] == '1')
-            parsing.wall += 1;
-        if(map[i] == 'E')
-            parsing.exit += 1;
-        if(map[i] == 'P')
-        {
-            parsing.player += 1;
-            parsing.player_pos = i;
-        }
-        if(map[i] == 'C')
-            parsing.consomable += 1;
-        i++;
-    }
-    return(parsing);
+	i = 0;
+	datamap->map.consomable = 0;
+	datamap->map.exit = 0;
+	datamap->map.player = 0;
+	datamap->map.wall = 0;
+	datamap->map.player_pos;
+	while(datamap->map.map[i])
+	{
+		if(datamap->map.map[i] == '1')
+			datamap->map.wall += 1;
+		if(datamap->map.map[i] == 'E')
+			datamap->map.exit += 1;
+		if(datamap->map.map[i] == 'P')
+		{
+			datamap->map.player += 1;
+			datamap->map.player_pos = i;
+		}
+		if(datamap->map.map[i] == 'C')
+			datamap->map.consomable += 1;
+		i++;
+	}
 }
 
-int   parsingcorrect(t_map *map)
+int   parsingcorrect(t_data *datamap)
 {
-    int     i;
+	int     i;
 
-    *map = unitializeandparse(*map, map->map);
-    i = 0;
-    while(map->map[i] && map->map != NULL)
-    {
-        if (map->map[i] != '1' && map->map[i] != '0' && map->map[i] != 'E' && map->map[i] != 'P' && map->map[i] != 'C' && map->map[i] != '\n')
-            return (0);
-        i++;
-    }
-    if (map->exit != 1 || map->player != 1 || map->consomable < 1)
-        return(0);
+	unitializeandparse(datamap);
+	i = 0;
+	while(datamap->map.map[i] && datamap->map.map != NULL)
+	{
+		if (datamap->map.map[i] != '1' && datamap->map.map[i] != '0' && datamap->map.map[i] != 'E' && datamap->map.map[i] != 'P' && datamap->map.map[i] != 'C' && datamap->map.map[i] != '\n')
+			return (0);
+		i++;
+	}
+	if (datamap->map.exit != 1 || datamap->map.player != 1 || datamap->map.consomable < 1)
+		return(0);
 }

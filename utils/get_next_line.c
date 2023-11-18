@@ -46,7 +46,7 @@ char	*ft_secpart(char *str, int j)
 	i = 0;
 	while (str && str[len] && str[len] != '\n')
 		len++;
-	ret = malloc(sizeof(char) * (ft_strlen(str) - len + 1));
+	ret = malloc(sizeof(char) * (ft_strlengnl(str) - len + 1));
 	if (!ret)
 		return (NULL);
 	while (str && str[len])
@@ -80,7 +80,7 @@ char	*reading(int *i, char *str, int fd)
 			return (NULL);
 		}
 		str = ft_strjoingnl(str, buff, *i);
-		if (ft_strrchr(str, '\n'))
+		if (ft_strrchrgnl(str, '\n'))
 			break ;
 	}
 	free(buff);

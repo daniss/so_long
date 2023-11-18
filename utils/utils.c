@@ -1,5 +1,42 @@
 #include "../includes/so_long.h"
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long int	t;
+
+	t = n;
+	if (t < 0)
+	{
+		t *= -1;
+		ft_putchar_fd('-', fd);
+	}
+	if (t > 9)
+	{
+		ft_putnbr_fd((t / 10), fd);
+		ft_putchar_fd((t % 10 + '0'), fd);
+	}
+	else
+		ft_putchar_fd((t + '0'), fd);
+}
+
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (i);
+	while (s[i])
+		i++;
+	return (i);
+}
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	j;
