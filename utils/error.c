@@ -2,6 +2,7 @@
 
 void    error(char *msg)
 {
-	printf("Error : %s", msg);
+	write(2, "Error\n", 6);
+	write(2, msg, ft_strlen(msg));
 	exit(0);
 }

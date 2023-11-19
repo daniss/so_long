@@ -3,7 +3,10 @@
 int main(int argc, char **argv)
 {
 	t_data *mapdata;
+
 	mapdata = malloc(sizeof(t_data));
+	if(!mapdata)
+		error("Malloc error!\n");
 	mapdata->map.count = 0;
 	check(argc, argv, mapdata);
 	map_unitialize(mapdata);

@@ -47,12 +47,21 @@ void check(int argc, char **argv, t_data *mapdata)
 		error("Invalid number of arguments! \n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
+	{
+		free(mapdata);
 		error("File error!\n");
-	if(ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
+	}
+	if (ft_strnstr(argv[1], ".ber", ft_strlen(argv[1])) == NULL)
+	{
+		free(mapdata);
 		error("File type error, please use .ber file !\n");
+	}
 	get_map(fd, mapdata);
 	if (checklignwall(mapdata) == 0 || checkcolonwall(mapdata) == 0 || parsingcorrect(mapdata) == 0 || mapdata->map.colon == mapdata->map.lign)
+	{
+		free(mapdata->map.map);
+		free(mapdata);
 		error("Error with the map\n");
-	printf("%s", mapdata->map.map);
-	checkroute(mapdata);
+	}
+	//checkroute(mapdata);
 }

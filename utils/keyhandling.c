@@ -27,7 +27,7 @@ void   player_move(t_data *mapdata, int depla)
 	if (mapdata->map.map[mapdata->map.player_pos + depla] != '1' && mapdata->map.map[mapdata->map.player_pos + depla] != 'E')
 	{
 		mapdata->map.count++;
-		write(1, "number of mouvements : ", 24);
+		write(1, "number of mouvements : ", 23);
 		ft_putnbr_fd(mapdata->map.count, 1);
 		write(1, "\n", 1);
 		temp = mapdata->map.player_pos;
