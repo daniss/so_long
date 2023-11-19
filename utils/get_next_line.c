@@ -27,6 +27,8 @@ static char	*ft_firstpart(char *str, char **temp)
 		firstpart = malloc(sizeof(char) * (len + 2));
 	else
 		firstpart = malloc(sizeof(firstpart) * (len + 1));
+	if (!firstpart)
+		return (NULL);
 	while (i != len + 1)
 	{
 		firstpart[i] = str[i];

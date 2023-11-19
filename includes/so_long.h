@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/19 11:46:28 by dcindrak          #+#    #+#             */
+/*   Updated: 2023/11/19 11:46:28 by dcindrak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
 # include <stdio.h>
 # include "mlx.h"
 # include "mlx_int.h"
-# include "get_next_line.h" // changer gnl car c'est pas le mien
+# include "get_next_line.h"
 
 # define PX 50
 # define KEY_W				119

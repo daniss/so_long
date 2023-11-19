@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/19 11:45:05 by dcindrak          #+#    #+#             */
+/*   Updated: 2023/11/19 11:45:05 by dcindrak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 int checkcolonwall(t_data *mapdata)
@@ -44,7 +56,10 @@ void check(int argc, char **argv, t_data *mapdata)
 	int fd;
 
 	if (argc != 2)
+	{
+		free(mapdata);
 		error("Invalid number of arguments! \n");
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
