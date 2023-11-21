@@ -78,5 +78,5 @@ void check(int argc, char **argv, t_data *mapdata)
 		free(mapdata);
 		error("Error with the map\n");
 	}
-	//checkroute(mapdata);
+	checkroute(mapdata);
 }

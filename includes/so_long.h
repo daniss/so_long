@@ -74,7 +74,7 @@ void	ft_putchar_fd(char c, int fd);
 void	check(int argc, char **argv, t_data *mapdata);
 void	error(char *msg);
 int		parsingcorrect(t_data *mapdata);
-int		checkroute(t_data *mapdata);
+void	checkroute(t_data *mapdata);
 
 //mapunitialize
 void	map_unitialize(t_data *map);
