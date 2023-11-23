@@ -54,6 +54,13 @@ typedef struct s_mlx
 	void	*textures[6];
 }				t_mlx;
 
+typedef struct s_maparray
+{
+	char **maparray;
+	int x;
+	int y;
+}				t_maparray;
+
 typedef struct s_data
 {
 	t_map	map;
@@ -74,7 +81,8 @@ void	ft_putchar_fd(char c, int fd);
 void	check(int argc, char **argv, t_data *mapdata);
 void	error(char *msg);
 int		parsingcorrect(t_data *mapdata);
-void	checkroute(t_data *mapdata);
+int		check_path(char *argv, int lign);
+int		checkconso(t_data *mapdata);
 
 //mapunitialize
 void	map_unitialize(t_data *map);

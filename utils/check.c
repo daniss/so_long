@@ -72,11 +72,12 @@ void check(int argc, char **argv, t_data *mapdata)
 		error("File type error, please use .ber file !\n");
 	}
 	get_map(fd, mapdata);
-	if (checklignwall(mapdata) == 0 || checkcolonwall(mapdata) == 0 || parsingcorrect(mapdata) == 0 || mapdata->map.colon == mapdata->map.lign)
+	if (checklignwall(mapdata) == 0 || checkcolonwall(mapdata) == 0 
+	|| parsingcorrect(mapdata) == 0 || mapdata->map.colon == mapdata->map.lign
+	|| checkconso(mapdata) == 0 || check_path(argv[1], mapdata->map.lign) == 0)
 	{
 		free(mapdata->map.map);
 		free(mapdata);
 		error("Error with the map\n");
 	}
-	checkroute(mapdata);
 }
