@@ -71,7 +71,8 @@ void	check(int argc, char **argv, t_data *mapdata)
 		error("File type error, please use .ber file !\n");
 	}
 	get_map(fd, mapdata);
-	if (!checklignwall(mapdata)
+	if (!get_map(fd, mapdata)
+		|| !checklignwall(mapdata)
 		|| !checkcolonwall(mapdata)
 		|| !parsingcorrect(mapdata) || mapdata->map.colon == mapdata->map.lign
 		|| !check_path(argv[1], mapdata->map.lign)

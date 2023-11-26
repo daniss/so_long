@@ -12,22 +12,22 @@
 
 #include "../includes/so_long.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *mapdata;
+	t_data	*mapdata;
 
 	if (argc != 2)
 		error("Invalid number of arguments! \n");
 	mapdata = malloc(sizeof(t_data));
-	if(!mapdata)
+	if (!mapdata)
 		error("Malloc error!\n");
 	mapdata->map.count = 0;
 	check(argc, argv, mapdata);
 	map_unitialize(mapdata);
 	putexture(mapdata);
-	mlx_hook(mapdata->mlx.win_ptr, KeyPress, KeyPressMask, handle_key, mapdata);
-	mlx_hook(mapdata->mlx.win_ptr, DestroyNotify, ButtonPressMask, freeall, mapdata);
-	mlx_loop(mapdata->mlx.mlx_ptr);
+	mlx_hook(mapdata->ml.w, KeyPress, KeyPressMask, handle_key, mapdata);
+	mlx_hook(mapdata->ml.w, DestroyNotify, ButtonPressMask, freeall, mapdata);
+	mlx_loop(mapdata->ml.m);
 	freeall(mapdata);
-	return 0;
+	return (0);
 }

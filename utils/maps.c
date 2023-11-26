@@ -12,7 +12,7 @@
 
 #include "../includes/so_long.h"
 
-void get_map(int fd, t_data *mapdata)
+int	get_map(int fd, t_data *mapdata)
 {
 	char	*str;
 	int		i;
@@ -22,8 +22,8 @@ void get_map(int fd, t_data *mapdata)
 	mapdata->map.lign = 0;
 	mapdata->map.map = NULL;
 	str = get_next_line(fd);
-	if(!str)
-		error("Error with the map\n");
+	if (!str)
+		return (0);
 	while (str[mapdata->map.colon] && str[mapdata->map.colon] != '\n')
 		mapdata->map.colon++;
 	while (str != NULL)

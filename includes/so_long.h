@@ -49,9 +49,9 @@ typedef struct s_map
 
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*textures[5];
+	void	*m;
+	void	*w;
+	void	*t[5];
 }				t_mlx;
 
 typedef struct s_maparray
@@ -65,13 +65,13 @@ typedef struct s_maparray
 typedef struct s_data
 {
 	t_map	map;
-	t_mlx	mlx;
+	t_mlx	ml;
 }				t_data;
 
 
 //utils
 char	*ft_strnstr(const char *big, const char *little, size_t len);
-void	get_map(int fd, t_data *mapdata);
+int		get_map(int fd, t_data *mapdata);
 char	*ft_strjoin(char *s1, char *s2);
 int		freeall(t_data *mapdata);
 int		ft_strlen(char *s);
