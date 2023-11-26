@@ -6,52 +6,32 @@
 /*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:46:16 by dcindrak          #+#    #+#             */
-/*   Updated: 2023/11/23 21:28:13 by dcindrak         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:30:11 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 #include <stdbool.h>
 
-int	checkconso(t_data *mapdata)
+static int check_valid_path(t_maparray copy, int x, int y, char c)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while(mapdata->map.map[i])
-	{
-		if(mapdata->map.map[i] == 'C')
-		{
-			if(mapdata->map.map[i + 1] == '1' && mapdata->map.map[i - 1] == '1'
-			&& mapdata->map.map[i + mapdata->map.colon + 1] == '1' && mapdata->map.map[i - mapdata->map.colon - 1] == '1')
-				return(0);
-		}
-		i++;
-	}
-	return(1);
-}
-
-int check_valid_path(t_maparray *copy, int x, int y)
-{
-	if (copy->maparray[y][x] == '1' || copy->maparray[y][x] == 'e')
+	if (copy.maparray[y][x] == '1')
 		return 0;
-	if (copy->maparray[y][x] == 'E')
+	if (copy.maparray[y][x] == c)
 		return 1;
-	copy->maparray[y][x] = '1';
-	if (check_valid_path(copy, x, y + 1))
+	copy.maparray[y][x] = '1';
+	if (check_valid_path(copy, x, y + 1, c))
 		return 1;
-	if (check_valid_path(copy, x, y - 1))
+	if (check_valid_path(copy, x, y - 1, c))
 		return 1;
-	if (check_valid_path(copy, x + 1, y))
+	if (check_valid_path(copy, x + 1, y, c))
 		return 1;
-	if (check_valid_path(copy, x - 1, y))
+	if (check_valid_path(copy, x - 1, y, c))
 		return 1;
 	return 0;
 }
 
-void	find_player(t_maparray *copy)
+static void	find_player(t_maparray *copy)
 {
 	int i;
 	int j;
@@ -75,7 +55,7 @@ void	find_player(t_maparray *copy)
 	}
 }
 
-void	free_array(t_maparray *copy, int lign)
+static void	free_array(t_maparray *copy, int lign)
 {
 	int i;
 
@@ -88,14 +68,40 @@ void	free_array(t_maparray *copy, int lign)
 	free(copy->maparray);
 }
 
+static int checkcons_valid_path(t_maparray copy, int x, int y, char c)
+{
+	if (copy.maparray[y][x] == '1') {
+        return 0;
+    }
+
+    if (copy.maparray[y][x] == c) {
+        copy.consomable--;
+        if (copy.consomable == 0) {
+            return 1;  // All required 'c' characters found
+        }
+    }
+
+    copy.maparray[y][x] = '1';
+
+    // Recursively check neighboring cells
+    if (checkcons_valid_path(copy, x, y + 1, c) ||
+        checkcons_valid_path(copy, x, y - 1, c) ||
+        checkcons_valid_path(copy, x + 1, y, c) ||
+        checkcons_valid_path(copy, x - 1, y, c))
+	{
+        return 1;
+    }
+
+    return 0;
+}
+
 int check_path(char *argv, int lign)
 {
 	t_maparray	copy;
 	char		*str;
-	int			i;
 	int     	fd;
+	int	i = 0;
 
-	i = 0;
 	fd = open(argv, O_RDONLY);
 	copy.maparray = malloc(sizeof(char **) * lign);
 	if (copy.maparray == NULL)
@@ -108,10 +114,10 @@ int check_path(char *argv, int lign)
 		copy.maparray[i++] = str;
 	}
 	find_player(&copy);
-	if (check_valid_path(&copy, copy.x, copy.y) == 1)
+	if (check_valid_path(copy, copy.x, copy.y, 'E') == 1)
 	{
 		free_array(&copy, lign);
-		return 1;
+		return (1);
 	}
 	free_array(&copy, lign);
 	return 0;

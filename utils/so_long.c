@@ -16,6 +16,8 @@ int main(int argc, char **argv)
 {
 	t_data *mapdata;
 
+	if (argc != 2)
+		error("Invalid number of arguments! \n");
 	mapdata = malloc(sizeof(t_data));
 	if(!mapdata)
 		error("Malloc error!\n");

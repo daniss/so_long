@@ -12,9 +12,9 @@
 
 #include "../includes/so_long.h"
 
-void   unitializeandparse(t_data *datamap)
+static void	unitializeandparse(t_data *datamap)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	datamap->map.consomable = 0;
@@ -22,35 +22,43 @@ void   unitializeandparse(t_data *datamap)
 	datamap->map.player = 0;
 	datamap->map.wall = 0;
 	datamap->map.player_pos;
-	while(datamap->map.map[i])
+	while (datamap->map.map[i])
 	{
-		if(datamap->map.map[i] == '1')
+		if (datamap->map.map[i] == '1')
 			datamap->map.wall += 1;
-		if(datamap->map.map[i] == 'E')
+		if (datamap->map.map[i] == 'E')
 			datamap->map.exit += 1;
-		if(datamap->map.map[i] == 'P')
+		if (datamap->map.map[i] == 'P')
 		{
 			datamap->map.player += 1;
 			datamap->map.player_pos = i;
 		}
-		if(datamap->map.map[i] == 'C')
+		if (datamap->map.map[i] == 'C')
 			datamap->map.consomable += 1;
 		i++;
 	}
 }
 
-int   parsingcorrect(t_data *datamap)
+static int	checkifrightchar(char c)
 {
-	int     i;
+	if (c == '1' || c == '0' || c == 'E' || c == 'P' || c == 'C' || c == '\n')
+		return (1);
+	return (0);
+}
+
+int	parsingcorrect(t_data *datamap)
+{
+	int	i;
 
 	unitializeandparse(datamap);
 	i = 0;
-	while(datamap->map.map[i] && datamap->map.map != NULL)
+	while (datamap->map.map[i] && datamap->map.map != NULL)
 	{
-		if (datamap->map.map[i] != '1' && datamap->map.map[i] != '0' && datamap->map.map[i] != 'E' && datamap->map.map[i] != 'P' && datamap->map.map[i] != 'C' && datamap->map.map[i] != '\n')
+		if (checkifrightchar(datamap->map.map[i]) == 0)
 			return (0);
 		i++;
 	}
-	if (datamap->map.exit != 1 || datamap->map.player != 1 || datamap->map.consomable < 1)
-		return(0);
+	if (datamap->map.exit != 1 || datamap->map.player != 1
+		|| datamap->map.consomable < 1)
+		return (0);
 }

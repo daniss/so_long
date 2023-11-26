@@ -6,7 +6,7 @@
 /*   By: dcindrak <dcindrak@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 11:45:37 by dcindrak          #+#    #+#             */
-/*   Updated: 2023/11/19 11:45:38 by dcindrak         ###   ########.fr       */
+/*   Updated: 2023/11/26 22:01:33 by dcindrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	freeall(t_data *mapdata)
 	mlx_destroy_image(mapdata->mlx.mlx_ptr, mapdata->mlx.textures[2]);
 	mlx_destroy_image(mapdata->mlx.mlx_ptr, mapdata->mlx.textures[3]);
 	mlx_destroy_image(mapdata->mlx.mlx_ptr, mapdata->mlx.textures[4]);
-	mlx_destroy_image(mapdata->mlx.mlx_ptr, mapdata->mlx.textures[5]);
 	mlx_destroy_window(mapdata->mlx.mlx_ptr, mapdata->mlx.win_ptr);
 	mlx_destroy_display(mapdata->mlx.mlx_ptr); // double free or corruption
 	free(mapdata->mlx.mlx_ptr);

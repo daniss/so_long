@@ -7,7 +7,8 @@ INC			=	-I ./inc -I ./mlx
 LIB			=	-L lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
 SRC			=	utils/check.c utils/so_long.c utils/utils.c utils/get_next_line_utils.c utils/get_next_line.c \
-utils/maps.c utils/error.c utils/parsing.c utils/mapunitialize.c utils/keyhandling.c utils/checkroute.c
+utils/maps.c utils/error.c utils/parsing.c utils/mapunitialize.c utils/keyhandling.c utils/checkroute.c \
+utils/checkconso.c
 
 all:		$(MLX) obj $(NAME)
 

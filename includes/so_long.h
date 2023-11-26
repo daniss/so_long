@@ -51,7 +51,7 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*textures[6];
+	void	*textures[5];
 }				t_mlx;
 
 typedef struct s_maparray
@@ -59,6 +59,7 @@ typedef struct s_maparray
 	char **maparray;
 	int x;
 	int y;
+	int consomable;
 }				t_maparray;
 
 typedef struct s_data
@@ -82,7 +83,7 @@ void	check(int argc, char **argv, t_data *mapdata);
 void	error(char *msg);
 int		parsingcorrect(t_data *mapdata);
 int		check_path(char *argv, int lign);
-int		checkconso(t_data *mapdata);
+int 	check_conso(char *argv, int lign, int conso);
 
 //mapunitialize
 void	map_unitialize(t_data *map);

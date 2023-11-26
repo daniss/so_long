@@ -22,6 +22,8 @@ void get_map(int fd, t_data *mapdata)
 	mapdata->map.lign = 0;
 	mapdata->map.map = NULL;
 	str = get_next_line(fd);
+	if(!str)
+		error("Error with the map\n");
 	while (str[mapdata->map.colon] && str[mapdata->map.colon] != '\n')
 		mapdata->map.colon++;
 	while (str != NULL)
@@ -32,9 +34,7 @@ void get_map(int fd, t_data *mapdata)
 		while (str != NULL && str[i] && str[i] != '\n')
 			i++;
 		if (str != NULL && mapdata->map.colon != i)
-		{
 			error("Error with the map\n");
-		}
 		mapdata->map.lign++;
 		i = 0;
 	}

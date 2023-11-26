@@ -36,7 +36,6 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd((t + '0'), fd);
 }
 
-
 int	ft_strlen(char *s)
 {
 	int	i;
