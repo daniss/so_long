@@ -1,19 +1,19 @@
 #include "../includes/so_long.h"
 
-static int checkcons_valid_path(t_maparray copy, int x, int y, char c)
+static int checkcons_valid_path(t_maparray *copy, int x, int y, char c)
 {
-	if (copy.maparray[y][x] == '1') {
+	if (copy->maparray[y][x] == '1') {
         return 0;
     }
 
-    if (copy.maparray[y][x] == c) {
-        copy.consomable--;
-        if (copy.consomable == 0) {
-            return 1;  // All required 'c' characters found
+    if (copy->maparray[y][x] == c) {
+        copy->consomable--;
+        if (copy->consomable == 0) {
+            return 1;
         }
     }
 
-    copy.maparray[y][x] = '1';
+    copy->maparray[y][x] = '1';
 
     // Recursively check neighboring cells
     if (checkcons_valid_path(copy, x, y + 1, c) ||
@@ -84,11 +84,11 @@ int check_conso(char *argv, int lign, int conso)
 	}
 	copy.consomable = conso;
 	find_player(&copy);
-	if (checkcons_valid_path(copy, copy.x, copy.y, 'C') == 1)
+	if (checkcons_valid_path(&copy, copy.x, copy.y, 'C') == 1)
 	{
 		free_array(&copy, lign);
 		return (1);
 	}
 	free_array(&copy, lign);
-	return 0;
+	return (0);
 }
