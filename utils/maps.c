@@ -18,8 +18,6 @@ int	get_map(int fd, t_data *mapdata)
 	int		i;
 
 	i = 0;
-	mapdata->map.colon = 0;
-	mapdata->map.lign = 0;
 	mapdata->map.map = NULL;
 	str = get_next_line(fd);
 	if (!str)
@@ -39,4 +37,5 @@ int	get_map(int fd, t_data *mapdata)
 		i = 0;
 	}
 	free(str);
+	return (1);
 }
