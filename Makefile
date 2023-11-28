@@ -9,31 +9,20 @@ SRC			=	utils/check.c utils/so_long.c utils/utils.c utils/get_next_line_utils.c 
 utils/maps.c utils/error.c utils/parsing.c utils/mapunitialize.c utils/keyhandling.c utils/checkroute.c \
 utils/checkconso.c
 
-all:		$(MLX) obj $(NAME)
+all:		$(MLX) $(NAME)
 
 $(NAME):	$(OBJ) includes/so_long.h
 			$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
 $(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
 			@make -s -C mlx
-			@echo " [ OK ] | Minilibx ready!"
-
-obj:
-			@mkdir -p obj
-
-obj/%.o:	src/%.c
-			$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
-
 			@rm -rf $(OBJ) obj
-			@echo "object files removed."
 
 fclean:		clean
 
 			@rm -rf $(NAME)
-			@echo "binary file removed."
 
 re:			fclean all
 

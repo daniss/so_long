@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 # include <stdio.h>
-# include "mlx.h"
-# include "mlx_int.h"
+# include "../mlx/mlx.h"
+# include "../mlx/mlx_int.h"
 # include "get_next_line.h"
 
 # define PX 50
@@ -34,17 +34,17 @@
 
 typedef struct s_map
 {
-	int	exit;
-	int	player;
-	int	consomable;
-	int	wall;
-	int player_pos;
-	int	lign;
-	int	colon;
-	int	x;
-	int	y;
-	int	count;
-	char *map;
+	int		exit;
+	int		player;
+	int		consomable;
+	int		wall;
+	int		player_pos;
+	int		lign;
+	int		colon;
+	int		x;
+	int		y;
+	int		count;
+	char	*map;
 }				t_map;
 
 typedef struct s_mlx
@@ -56,10 +56,10 @@ typedef struct s_mlx
 
 typedef struct s_maparray
 {
-	char **maparray;
-	int x;
-	int y;
-	int consomable;
+	char	**maparray;
+	int		x;
+	int		y;
+	int		consomable;
 }				t_maparray;
 
 typedef struct s_data
@@ -67,7 +67,6 @@ typedef struct s_data
 	t_map	map;
 	t_mlx	ml;
 }				t_data;
-
 
 //utils
 char	*ft_strnstr(const char *big, const char *little, size_t len);
@@ -83,7 +82,7 @@ void	check(int argc, char **argv, t_data *mapdata);
 void	error(char *msg);
 int		parsingcorrect(t_data *mapdata);
 int		check_path(char *argv, int lign);
-int 	check_conso(char *argv, int lign, int conso);
+int		check_conso(char *argv, int lign, int conso);
 
 //mapunitialize
 void	map_unitialize(t_data *map);
